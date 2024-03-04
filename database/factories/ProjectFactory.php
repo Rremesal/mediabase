@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+
 use Illuminate\Database\Eloquent\Factories\Factory;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\project>
@@ -17,8 +19,8 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name(),
-            'description' => fake()->paragraph(),
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
         ];
     }
 }
