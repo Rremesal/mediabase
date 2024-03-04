@@ -1,0 +1,20 @@
+.project-table{
+    display: flex;
+    margin-bottom: 1.5rem;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 2px 0px #3333333d;
+
+    min-height: 5rem;
+}
+
+.project-title{
+    display: flex;
+    align-items: center;
+    width: 30%;
+    padding: 1rem;
+}
+
+.project-desc{
+    display: flex;
+    align-items: center;
+}
