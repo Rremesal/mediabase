@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserProjectController;
@@ -31,5 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('project', ProjectController::class);
 });
+
+Route::resource("/image", ImageController::class)->middleware("auth");
 
 require __DIR__.'/auth.php';
