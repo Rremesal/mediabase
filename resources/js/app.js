@@ -1,3 +1,5 @@
+import "./image-edit"
+
 import './bootstrap';
 
 import Alpine from 'alpinejs';
