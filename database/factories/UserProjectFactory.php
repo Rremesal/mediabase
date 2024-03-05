@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,12 @@ class UserProjectFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory(1)->create();
+        $project = project::factory(1)->create();
+
         return [
-            
+            'project_id' => $project->id,
+            'user_id' => $user->id,
         ];
     }
 }
