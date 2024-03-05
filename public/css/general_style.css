@@ -1,0 +1,9 @@
+/* Hier staat de algemene styling voor de website */
+
+.pageWidth{
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
