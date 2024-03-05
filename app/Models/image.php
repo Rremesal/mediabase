@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class image extends Model
+class Image extends Model
 {
     use HasFactory;
 
     public function project(): BelongsTo
     {
-        return $this->belongsTo(project::class);
+        return $this->belongsTo(Project::class);
     }
+
+    // protected $fillable = [
+    //     'image', o
+    // ];
 }
