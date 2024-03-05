@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('project', ProjectController::class);
 });
 
+Route::get('/images/resize', [ImageController::class, 'resizeImage']);
+Route::post('/images/store-resized', [ImageController::class, 'resizeImagePost'])->name('resizeImagePost');
 Route::resource("/image", ImageController::class)->middleware("auth");
+
 
 require __DIR__.'/auth.php';
