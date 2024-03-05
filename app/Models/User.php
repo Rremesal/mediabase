@@ -45,8 +45,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function project(): HasManyThrough
+    public function projects(): HasManyThrough
     {
-        return $this->hasManyThrough(project::class,user_project::class);
+        return $this->hasManyThrough(project::class,user_project::class, 'user_id', 'id', 'id', 'project_id');
     }
 }

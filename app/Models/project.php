@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class project extends Model
 {
     use HasFactory;
-    
-    public function user(): HasManyThrough
+
+    protected $fillable = ['title', 'description'];
+
+    public function users(): HasManyThrough
     {
-        return $this->hasManyThrough(User::class, user_project::class);
+        return $this->hasManyThrough(User::class, user_project::class, 'project_id', 'id', 'id', 'user_id');
     }
 
     public function images(): HasMany

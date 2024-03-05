@@ -12,23 +12,44 @@ class ProjectController extends Controller
     public function index()
     {
         $userId = auth()->user()->id;
-        $user = User::where('id', $userId)->first();
+        $user = User::with('projects')->where('id', $userId)->get()[0];
 
-        $projects = $user->project();
+        $projects = $user->projects;
 
-        return view('project.index')->with('projects',$projects);
+        return view('project.index', ['projects' => $projects]);
     }
 
     public function create()
     {
-        return view('project.create');
+        $users = User::all();
+        return view('project.create', ['users' => $users]);
+    }
+
+    public function edit(project $project) {
+        $users = User::all();
+        return view('project.create', ['users' => $users, 'project' => $project]);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required'
+
+        $data = $request->validate([
+            'title' => ['required'],
+            'description' => ['required'],
+            "teammembers" => ['required']
         ]);
+
+        $teammembers = $data['teammembers'];
+        unset($data['teammembers']);
+
+        $project = project::create($data);
+        foreach($teammembers as $member_id) {
+            user_project::create([
+                'project_id' => $project->id,
+                'user_id' => $member_id
+            ]);
+        }
+
+        return redirect()->route('project.index');
     }
 }
