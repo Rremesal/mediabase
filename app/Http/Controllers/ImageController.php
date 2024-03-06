@@ -18,7 +18,7 @@ class ImageController extends Controller
         $file = request()->file("file");
         $filename = request()->filename.".png";
         $content = file_get_contents($file->getLinkTarget());
-        Storage::put($filename, $content);
+        Storage::disk('public')->put($filename, $content);
         $path = Storage::url($filename);
 
         $data = [
@@ -30,6 +30,13 @@ class ImageController extends Controller
         image::create($data);
 
         return redirect()->route("image.create")->with("message", "afbeelding succesvol verwerkt");
+    }
+
+    public function destroy(image $image) {
+        Storage::delete($image->path);
+        $image->delete();
+
+        return redirect()->back();
     }
 
 }

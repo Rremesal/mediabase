@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    private $rules = [
+        'title' => ['required'],
+        'description' => ['required'],
+        "teammembers" => ['required']
+    ];
+
     public function index()
     {
         $userId = auth()->user()->id;
@@ -26,18 +33,33 @@ class ProjectController extends Controller
     }
 
     public function edit(project $project) {
-        $users = User::all();
-        return view('project.create', ['users' => $users, 'project' => $project]);
+        $allUsers = User::all();
+        $users = $allUsers->diff($project->users);
+        return view('project.create', ['users' => $users, 'project' => $project, 'members' => $project->users]);
     }
 
-    public function store(Request $request)
+    public function update(project $project) {
+
+        $data = request()->validate($this->rules);
+
+        foreach($data['teammembers'] as $member) {
+
+            user_project::create([
+                'project_id' => $project->id,
+                'user_id' => intval($member)
+            ]);
+        }
+        unset($data['teammembers']);
+        $project->update($data);
+
+        return redirect()->back();
+
+    }
+
+    public function store()
     {
 
-        $data = $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
-            "teammembers" => ['required']
-        ]);
+        $data = request()->validate($this->rules);
 
         $teammembers = $data['teammembers'];
         unset($data['teammembers']);
@@ -49,6 +71,27 @@ class ProjectController extends Controller
                 'user_id' => $member_id
             ]);
         }
+
+        return redirect()->route('project.index');
+    }
+
+    public function show(project $project) {
+        $images = $project->images;
+
+        return view('project.show', ['images' => $images]);
+    }
+
+    public function destroy(project $project) {
+        $userProjects = user_project::where('project_id', $project->id)->get();
+        if(sizeof($userProjects) > 1) {
+            foreach($userProjects as $userProject) {
+                $userProject->delete();
+            }
+        } else {
+            $userProjects->delete();
+        }
+
+        $project->delete();
 
         return redirect()->route('project.index');
     }
