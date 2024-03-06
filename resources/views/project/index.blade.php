@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 
     <section class="pageWidth mt-2">
@@ -7,6 +8,10 @@
                 <x-primary-button><a href="{{ route('project.create') }}">Nieuw project</a></x-primary-button>
             </main>
         </article>
+        <div class="table-header">
+            <div class="col">Title</div>
+            <div class="col">description</div>
+        </div>
         @foreach ($projects as $project)
             <article class="project-table grid grid-cols-3 grid-rows-1 rounded px-3">
                 <header class="project-title"> <b>{{$project->title}}</b> </header>
