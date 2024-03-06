@@ -1,7 +1,6 @@
 @props(['image' => null])
 <x-app-layout>
     @if ($image !== null)
-    @dump($project_id)
         <div class="demo"></div>
         <img id="myimage" class="w-32" src="{{ asset($image) }}" alt="">
         <form id="image-form" enctype="multipart/form-data" method="POST"
@@ -23,9 +22,10 @@
     @else
         <div class=" w-full h-full mx-5 my-3">
             <form method="POST" enctype="multipart/form-data"
-                action="{{ route('image.store', ['project_id' => isset($project_id) ? $project_id : '']) }}">
+                action="{{ route('image.store', ['project_id' => $project_id]) }}">
                 @csrf
                 @method('POST')
+                <input type="text" value="{{ $project_id }}" hidden>
                 <input class="text-white" type="file" name="image">
                 <x-primary-button>Uploaden</x-primary-button>
             </form>
