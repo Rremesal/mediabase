@@ -37,19 +37,21 @@
                     {{ $project ? 'Opslaan' : 'Aanmaken' }}
                 </x-primary-button>
             </form>
-            <div class="text-white">
-                <header class="text-xl font-bold">Huidige teamleden</header>
-                @foreach ($members as $member)
-                    <form method="POST" action="{{ route('userproject.destroy', [$project, $member]) }}">
-                        @csrf
-                        @method('DELETE')
-                        <div class="grid grid-cols-2 py-1">
-                            <div class="mx-2">{{ $member->name }}</div>
-                            <x-primary-button class="w-fit bg-red-500">Delete</x-primary-button>
-                        </div>
-                    </form>
-                @endforeach
-            </div>
+            @if (isset($members))
+                <div class="text-white">
+                    <header class="text-xl font-bold">Huidige teamleden</header>
+                    @foreach ($members as $member)
+                        <form method="POST" action="{{ route('userproject.destroy', [$project, $member]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <div class="grid grid-cols-2 py-1">
+                                <div class="mx-2">{{ $member->name }}</div>
+                                <x-primary-button class="w-fit bg-red-500">Delete</x-primary-button>
+                            </div>
+                        </form>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

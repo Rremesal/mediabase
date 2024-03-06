@@ -15,7 +15,7 @@
                 <form class="flex items-center justify-end" method="POST" action="{{ route('project.destroy', $project) }}">
                     @csrf
                     @method("DELETE")
-                    <x-primary-button><a href="{{ route('project.show', $project) }}">Openen</a></x-primary-button>
+                    <x-primary-button type="button"><a href="{{ route('project.show', $project) }}">Openen</a></x-primary-button>
                     <x-secondary-button class=" h-fit mx-1"><a class="h-full w-full" href="{{ route('project.edit', $project) }}">Wijzigen</a></x-primary-button>
                     <x-primary-button class="h-fit bg-red-500 text-white hover:bg-red-400">Verwijderen</x-primary-button>
                 </form>

@@ -11,7 +11,8 @@ let opts = {
 const c = new Croppie(document.getElementById('myimage'), opts);
 const button = document.getElementById("submit");
 const filename = document.getElementById("filename")
-console.log(filename)
+const project_id = document.getElementById('project_id');
+
 
 
 button.addEventListener("click", (ev) => {
@@ -21,6 +22,7 @@ button.addEventListener("click", (ev) => {
         let formData = new FormData();
         formData.append("file", blob);
         formData.append("filename", filename.value);
+        formData.append('project_id', project_id.value);
 
         xhr.open("POST", "/api/images/store", true);
 
