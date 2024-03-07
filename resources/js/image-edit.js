@@ -27,5 +27,7 @@ button.addEventListener("click", (ev) => {
         xhr.open("POST", "/api/images/store", true);
 
         xhr.send(formData);
+
+        location.reload();
     })
 })
