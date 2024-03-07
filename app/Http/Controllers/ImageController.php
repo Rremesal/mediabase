@@ -33,7 +33,6 @@ class ImageController extends Controller
 
             $projects = project::all();
             $project_id = array(request()->query)[0];
-            dd($project_id);
 
             return view('images.create', ['image' => Storage::url($newfilename), 'projects' => $projects, 'project_id' => $project_id]);
         }
@@ -53,7 +52,7 @@ class ImageController extends Controller
 
         return redirect()->route('project.index');
     }
-  
+
       public function resizeImage(){
         return view('resizeImage');
     }
@@ -82,7 +81,7 @@ class ImageController extends Controller
         return back()
         ->with('succes', 'Image Upload Succesfully')
         ->with('imageName', $input['imagename']);
-        
+
     }
 
 
