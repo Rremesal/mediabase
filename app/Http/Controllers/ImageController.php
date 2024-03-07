@@ -14,7 +14,7 @@ class ImageController extends Controller
     public function create() {
         $project_id = "0";
         if(sizeof(request()->query) > 0) {
-            $project_id = array(request()->query);
+            $project_id = request()->query('project_id');
         }
 
         $projects = project::all();
@@ -32,7 +32,7 @@ class ImageController extends Controller
             Storage::disk('public')->put($newfilename, $content);
 
             $projects = project::all();
-            $project_id = array(request()->query)[0];
+            $project_id = request()->query('project_id');
 
             return view('images.create', ['image' => Storage::url($newfilename), 'projects' => $projects, 'project_id' => $project_id]);
         }
