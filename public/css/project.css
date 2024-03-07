@@ -14,3 +14,17 @@
     display: flex;
     align-items: center;
 }
+
+.table-header{
+    display: flex;
+    margin: 3rem 0 2rem 0;
+}
+
+.col{
+    width: 33.33%;
+    display: flex;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 20px;
+}
