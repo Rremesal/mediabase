@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="w-4/5 mx-auto flex justify-end pt-4">
-        <x-primary-button class="self-end"><a class="w-full h-full" href="{{ route('image.create') }}">Nieuwe afbeelding</a></x-primary-button>
+        <x-primary-button class="self-end"><a class="w-full h-full" href="{{ route('image.create', ['project_id' => $project->id]) }}">Nieuwe afbeelding</a></x-primary-button>
     </div>
     <div class=" mx-auto w-4/5 flex flex-wrap gap-3">
         @foreach ($images as $image)

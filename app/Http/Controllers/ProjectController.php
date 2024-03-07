@@ -78,7 +78,7 @@ class ProjectController extends Controller
     public function show(project $project) {
         $images = $project->images;
 
-        return view('project.show', ['images' => $images]);
+        return view('project.show', ['images' => $images, 'project' => $project]);
     }
 
     public function destroy(project $project) {
