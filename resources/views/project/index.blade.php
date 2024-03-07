@@ -8,8 +8,8 @@
             </main>
         </article>
         <div class="table-header">
-            <div class="col">Title</div>
-            <div class="col">description</div>
+            <div class="col dark:text-white">Title</div>
+            <div class="col dark:text-white">Description</div>
         </div>
         @foreach ($projects as $project)
             <article class="project-table grid grid-cols-3 grid-rows-1 rounded px-3">
