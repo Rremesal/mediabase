@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\project;
 use App\Models\User;
 use App\Models\user_project;
@@ -82,13 +83,23 @@ class ProjectController extends Controller
     }
 
     public function destroy(project $project) {
+
+        $images = Image::where('project_id', $project->id)->get();
+        if(sizeof($images) > 1 ) {
+            foreach($images as $image) {
+                $image->delete();
+            }
+        } else if(sizeof($images) == 1) {            
+            $images[0]->delete();
+        }
+
         $userProjects = user_project::where('project_id', $project->id)->get();
         if(sizeof($userProjects) > 1) {
             foreach($userProjects as $userProject) {
                 $userProject->delete();
             }
-        } else {
-            $userProjects->delete();
+        } else if(sizeof($userProjects) == 1) {
+            $userProjects[0]->delete();
         }
 
         $project->delete();
