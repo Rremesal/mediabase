@@ -1,7 +1,6 @@
 @props(['image' => null])
 <x-app-layout>
     @if ($image !== null)
-    @dump($project_id)
         <div class="demo"></div>
         <img id="myimage" class="w-32" src="{{ asset($image) }}" alt="">
         <form id="image-form" enctype="multipart/form-data" method="POST"
